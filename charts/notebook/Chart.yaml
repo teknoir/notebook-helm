@@ -3,5 +3,5 @@ name: notebook
 description: A Helm chart for Teknoir Notebook
 
 type: application
-version: 0.0.0-alpha.0
+version: 0.0.0-alpha.1
 appVersion: "latest"
