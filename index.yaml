@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  notebook:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2026-01-29T07:45:12.844158548Z"
+    description: A Helm chart for Teknoir Notebook
+    digest: 28a07e52d04826a89c9d7133ec1fb4592173263a16416f4bfd31b27f25c1f70c
+    name: notebook
+    type: application
+    urls:
+    - https://github.com/teknoir/notebook-helm/releases/download/notebook-0.0.0-alpha.1/notebook-0.0.0-alpha.1.tgz
+    version: 0.0.0-alpha.1
+generated: "2026-01-29T07:45:12.844167715Z"
