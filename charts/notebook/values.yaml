@@ -1,0 +1,18 @@
+# Notebook container configuration
+image:
+  repository: jupyter/datascience-notebook
+  tag: latest
+  pullPolicy: Always
+
+# Resource requests and limits
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 100m
+  limits:
+    memory: 1Gi
+    cpu: 1500m
+
+# Service configuration
+nodePort:
+  enabled: false

@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notebook
+  name: notebook
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: notebook
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: notebook
+    spec:
+      initContainers:
+        - name: change-ownership-container
+          image: busybox
+          command: [ "/bin/chown","-R","1000:1000", "/home/jovyan" ]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /home/jovyan
+      containers:
+        - name: notebook
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8888
+          command: [ "start-notebook.sh" ]
+          args: [ "--NotebookApp.token=''", "--ServerApp.disable_check_xsrf=true" ]
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /home/jovyan
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsUser: 1000
+      volumes:
+        - name: storage-volume
+          hostPath:
+            path: /opt/teknoir/notebook
+            type: DirectoryOrCreate
