@@ -4,6 +4,13 @@ image:
   tag: latest
   pullPolicy: Always
 
+# Image pull secrets
+imagePullSecrets: []
+# - name: teknoir-registry
+
+# Service node selector
+nodeSelector: {}
+
 # Resource requests and limits
 resources:
   requests:
