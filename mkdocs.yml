@@ -1,5 +1,5 @@
 site_name: Teknoir Notebook TechDocs
-site_description: Futuristic operating guide for the Teknoir Notebook Backstage components
+site_description: Operating guide for the Teknoir Notebook App
 
 nav:
   - Overview: index.md
