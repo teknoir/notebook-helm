@@ -1,0 +1,11 @@
+site_name: Teknoir Notebook TechDocs
+site_description: Futuristic operating guide for the Teknoir Notebook Backstage components
+
+nav:
+  - Overview: index.md
+  - Notebook App: notebook-app.md
+  - Notebook HelmChart: notebook-helm.md
+  - Notebook Image: notebook-image.md
+
+plugins:
+  - techdocs-core

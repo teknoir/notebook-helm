@@ -1,0 +1,64 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  title: Notebook
+  name: notebook-app
+  namespace: teknoir
+  description: The Teknoir Notebook is a Jupyter Notebook Data Science Stack
+  annotations:
+    'github.com/project-slug': teknoir/notebook-helm
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  type: app
+  owner: group:teknoir/public
+  system: system:teknoir/core
+  lifecycle: production
+  dependsOn:
+    - component:teknoir/docker.io.jupyter.datascience-notebook
+    - component:teknoir/notebook-helm
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  title: Notebook HelmChart
+  name: notebook-helm
+  namespace: teknoir
+  description: The Teknoir Notebook HelmChart
+  annotations:
+    'github.com/project-slug': teknoir/notebook-helm
+    'teknoir.org/helm-registry': teknoir.github.io/notebook-helm
+    'teknoir.org/helmchart': notebook
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  type: helmchart
+  owner: group:teknoir/public
+  system: system:teknoir/core
+  lifecycle: production
+  dependsOn:
+    - component:teknoir/ghcr.io.teknoir.notebook-app
+  registry: teknoir.github.io/notebook-helm
+  helmchart: notebook
+  versions:
+    - 0.0.2
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  title: Notebook Image
+  name: docker.io.jupyter.datascience-notebook
+  namespace: teknoir
+  description: Jupyter Notebook Data Science Stack
+  annotations:
+    'github.com/project-slug': teknoir/notebook-helm
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  type: image
+  owner: group:teknoir/public
+  system: system:teknoir/core
+  lifecycle: production
+  repository: docker.io/jupyter/datascience-notebook
+  versions:
+    - latest
